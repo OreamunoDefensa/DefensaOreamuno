@@ -13,18 +13,13 @@
   </form>
   <br>
 
-  <!-- Enlace a WhatsApp que solo se activa después de que se completa el formulario -->
-  <a id="whatsapp-link" href="https://chat.whatsapp.com/TU_ENLACE_DEL_GRUPO" target="_blank" style="pointer-events: none; color: gray;">
-    Unirme al grupo de WhatsApp
-  </a>
-
+  <!-- No es necesario mostrar el enlace de WhatsApp, solo lo redirigimos directamente después del registro -->
+  
   <script type="module" src="firebase-config.js"></script>
-  <script type="module" src="script.js"></script>
 
   <script>
-    // Obtener el formulario y el enlace de WhatsApp
+    // Obtener el formulario
     const formulario = document.getElementById("formulario");
-    const whatsappLink = document.getElementById("whatsapp-link");
 
     formulario.addEventListener("submit", async function(e) {
       e.preventDefault();
@@ -44,14 +39,12 @@
         // Llamar a la función para guardar los datos en Firebase
         await saveToFirebase(name, phone);
 
-        // Si la inserción en Firebase es exitosa, habilitar el enlace de WhatsApp
-        whatsappLink.style.pointerEvents = "auto";  // Habilitar clic
-        whatsappLink.style.color = "blue";  // Cambiar color del enlace para que sea visible
-        alert('¡Registro exitoso! Ahora puedes unirte al grupo.');
+        // Si la inserción en Firebase es exitosa, redirigir al grupo de WhatsApp
+        alert('¡Registro exitoso! Ahora serás redirigido al grupo.');
 
-        // Redirigir automáticamente al grupo de WhatsApp después de 2 segundos
+        // Redirigir automáticamente al grupo de WhatsApp después de un breve retraso (2 segundos)
         setTimeout(function() {
-          window.location.href = whatsappLink.href;
+          window.location.href = "https://chat.whatsapp.com/TU_ENLACE_DEL_GRUPO"; // Redirige directamente al grupo
         }, 2000);
 
       } catch (error) {
