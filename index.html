@@ -12,11 +12,35 @@
     <button type="submit">Registrarse</button>
   </form>
   <br>
-  <a href="https://chat.whatsapp.com/TU_ENLACE_DEL_GRUPO" target="_blank">Unirme al grupo de WhatsApp</a>
+
+  <!-- Enlace a WhatsApp deshabilitado inicialmente -->
+  <a id="whatsapp-link" href="https://chat.whatsapp.com/TU_ENLACE_DEL_GRUPO" target="_blank" style="pointer-events: none; color: gray;">
+    Unirme al grupo de WhatsApp
+  </a>
 
   <script type="module" src="firebase-config.js"></script>
   <script type="module" src="script.js"></script>
-</body>
-<link rel="stylesheet" href="style.css" />
 
+  <script>
+    // Obtener el formulario y el enlace de WhatsApp
+    const formulario = document.getElementById("formulario");
+    const whatsappLink = document.getElementById("whatsapp-link");
+
+    // Función que habilita el enlace si todos los campos están completos
+    formulario.addEventListener("input", function() {
+      const name = formulario.name.value.trim();
+      const phone = formulario.phone.value.trim();
+
+      if (name && phone) {
+        // Si ambos campos están completos, habilita el enlace
+        whatsappLink.style.pointerEvents = "auto";  // Habilitar clic
+        whatsappLink.style.color = "blue";  // Cambiar color del enlace para que sea visible
+      } else {
+        // Si algún campo está vacío, deshabilita el enlace
+        whatsappLink.style.pointerEvents = "none";  // Deshabilitar clic
+        whatsappLink.style.color = "gray";  // Colocar el enlace en gris
+      }
+    });
+  </script>
+</body>
 </html>
